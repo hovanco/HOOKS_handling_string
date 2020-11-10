@@ -1,29 +1,60 @@
 import React, { useState } from "react";
 
-function USE_OPERATOR_MAP() {
+function WRITE_BY_FUNCTION_C2() {
   const [stringNum, setStringNum] = useState("");
-  const [oldNumber, setOldNumber] = useState("");
-  const [eventNumber, setEventNumber] = useState("");
+  const [perfectNumber, setPerfectNumber] = useState("");
+  const [primeNumber, setPrimeNumber] = useState("");
+
+  var arrString = stringNum.split(",");
+  console.log("arrString: ", arrString);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    handlePerfectNumber();
+    handlePrimeNumber();
+  };
 
-    let arrString = stringNum.split(",");
-    let arrOldNum = [];
-    let arrEventNum = [];
+  const handlePerfectNumber = () => {
+    var arrPerfectNum = [];
+    var total = 0;
 
-    arrString.map((i) =>
-      i % 2 == 0 ? arrOldNum.push(i) : arrEventNum.push(i)
-    );
+    for (let j of arrString) {
+      total = 0;
+      for (let i = 1; i <= j / 2; i++) {
+        if (j % i === 0) {
+          total = total + i;
+        }
+      }
+      console.log(total, j);
+      if (total == j) {
+        arrPerfectNum.push(j);
+      }
+    }
+    setPerfectNumber(arrPerfectNum.join());
+  };
 
-    setOldNumber(arrOldNum.join());
-    setEventNumber(arrEventNum.join());
+  const handlePrimeNumber = () => {
+    var arrPrimeNum = [];
+    var isT = 0;
+    for (let j of arrString) {
+      isT = 0;
+      for (let i = 2; i <= j / 2; i++) {
+        if (j % i === 0) {
+          isT++;
+          break;
+        }
+      }
+      if (isT === 0) {
+        arrPrimeNum.push(j);
+      }
+    }
+    setPrimeNumber(arrPrimeNum.join());
   };
 
   const handleReset = () => {
     setStringNum("");
-    setOldNumber("");
-    setEventNumber("");
+    setPerfectNumber("");
+    setPrimeNumber("");
   };
 
   return (
@@ -33,14 +64,10 @@ function USE_OPERATOR_MAP() {
     >
       <div className="panel panel-danger">
         <div className="panel-heading">
-          <h3 className="panel-title">
-            Get old number and event number from array string
-          </h3>
+          <h3 className="panel-title">Number prime - Perfect number</h3>
         </div>
         <div className="panel-body">
           <form onSubmit={handleSubmit}>
-            <legend>Cut string</legend>
-
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <label>Array input</label>
@@ -51,7 +78,7 @@ function USE_OPERATOR_MAP() {
                   name="num1"
                   value={stringNum}
                   onChange={(e) => setStringNum(e.target.value)} // convert string-number to number
-                  placeholder="Enter list number"
+                  placeholder="Enter list string-number"
                 />
               </div>
             </div>
@@ -59,24 +86,22 @@ function USE_OPERATOR_MAP() {
 
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <label>Old integers</label>
+                <label>Perfect number</label>
                 <input
                   type="text"
                   className="form-control"
-                  id
-                  value={oldNumber}
+                  value={perfectNumber}
                 />
               </div>
             </div>
 
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <label>Even integers</label>
+                <label>Number prime</label>
                 <input
                   type="text"
                   className="form-control"
-                  id
-                  value={eventNumber}
+                  value={primeNumber}
                 />
               </div>
             </div>
@@ -94,4 +119,4 @@ function USE_OPERATOR_MAP() {
   );
 }
 
-export default USE_OPERATOR_MAP;
+export default WRITE_BY_FUNCTION_C2;

@@ -1,29 +1,46 @@
 import React, { useState } from "react";
 
-function USE_OPERATOR_MAP() {
+function FIND_PERFECT_NUM() {
   const [stringNum, setStringNum] = useState("");
-  const [oldNumber, setOldNumber] = useState("");
-  const [eventNumber, setEventNumber] = useState("");
+
+  const [perfectNumber, setPerfectNumber] = useState("");
+
+  const [simpleNumber, setSimpleNumber] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     let arrString = stringNum.split(",");
-    let arrOldNum = [];
-    let arrEventNum = [];
 
-    arrString.map((i) =>
-      i % 2 == 0 ? arrOldNum.push(i) : arrEventNum.push(i)
-    );
+    var arrPerfectNum = [];
+    var arrSimpleNum = [];
 
-    setOldNumber(arrOldNum.join());
-    setEventNumber(arrEventNum.join());
+    var total = 0;
+    var i = 0;
+
+    for (let j of arrString) {
+      total = 0;
+      for (i = 1; i <= j / 2; i++) {
+        if (j % i === 0) {
+          total = total + i;
+        }
+      }
+      console.log(total, j);
+      if (total == j) {
+        arrPerfectNum.push(j);
+      }
+      console.log("total of i: ", total);
+    }
+    console.log("total of j: ", total);
+
+    setPerfectNumber(arrPerfectNum.join());
+    setSimpleNumber(arrSimpleNum.join());
   };
 
   const handleReset = () => {
     setStringNum("");
-    setOldNumber("");
-    setEventNumber("");
+    setPerfectNumber("");
+    setSimpleNumber("");
   };
 
   return (
@@ -59,24 +76,22 @@ function USE_OPERATOR_MAP() {
 
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <label>Old integers</label>
+                <label>Perfect Number</label>
                 <input
                   type="text"
                   className="form-control"
-                  id
-                  value={oldNumber}
+                  value={perfectNumber}
                 />
               </div>
             </div>
 
             <div class="row">
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <label>Even integers</label>
+                <label>Simple Number</label>
                 <input
                   type="text"
                   className="form-control"
-                  id
-                  value={eventNumber}
+                  value={simpleNumber}
                 />
               </div>
             </div>
@@ -94,4 +109,4 @@ function USE_OPERATOR_MAP() {
   );
 }
 
-export default USE_OPERATOR_MAP;
+export default FIND_PERFECT_NUM;

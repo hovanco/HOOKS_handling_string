@@ -39,7 +39,10 @@ function USE_MAX() {
   };
 
   return (
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div
+      className="col-xs-6 col-sm-6 col-md-6 col-lg-6"
+      style={{ marginLeft: "25%", marginTop: "5%" }}
+    >
       <div className="panel panel-danger">
         <div className="panel-heading">
           <h3 className="panel-title">
